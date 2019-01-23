@@ -11,12 +11,12 @@ before_install:
 #in assets/server.key.enc -out assets/server.key -d
 
 #Assign variables    
-export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz  
-export SFDX_AUTOUPDATE_DISABLE=false
-export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
-export SFDX_DOMAIN_RETRY=300
-export SFDX_DISABLE_APP_HUB=true
-export SFDX_LOG_LEVEL=DEBUG
+- export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz  
+- export SFDX_AUTOUPDATE_DISABLE=false
+- export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
+- export SFDX_DOMAIN_RETRY=300
+- export SFDX_DISABLE_APP_HUB=true
+- export SFDX_LOG_LEVEL=DEBUG
 
 before_script:
 #
@@ -24,10 +24,10 @@ before_script:
 #
 
 #Assign variables
-export DEPLOYDIR=src
-export TESTLEVEL=RunLocalTests
-sfdx --version
-sfdx plugins --core
+- export DEPLOYDIR=src
+- export TESTLEVEL=RunLocalTests
+- sfdx --version
+- sfdx plugins --core
 
 script:
 #
@@ -35,8 +35,8 @@ script:
 #
 
   #Authorize Target Deployment Org
-sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
+- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to Target Deployment Org and Run Unit Tests
-sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
+- sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
   #Example shows how to run a check only deploy.
   #- sfdx force:mdapi:deploy --checkonly --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
