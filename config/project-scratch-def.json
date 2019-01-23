@@ -1,6 +1,7 @@
 {
     "orgName": "wade.wegner Example",
     "edition": "Developer",
+    "sfdcLoginUrl": "https://test.salesforce.com",
     "orgPreferences" : {
         "enabled": ["S1DesktopEnabled"]
     }
